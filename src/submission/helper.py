@@ -21,7 +21,7 @@ def initialize_perceiver_model(mconf, bottleneck_dim=32):
     ### TODO
     ### [part g]: Make some other model here
     mconf.bottleneck_dim = bottleneck_dim
-    attention_model = GPT(mconf)
+    attention_model = GPT(mconf)  
     ### START CODE HERE
     ### END CODE HERE
     return attention_model
@@ -88,6 +88,7 @@ def finetune(reading_params_path, finetune_corpus_path, pretrain_dataset, block_
     train_dataset = NameDataset(data, pretrain_dataset)
 
     trainer_obj = Trainer(model, train_dataset, None, tconf)
+    trainer_obj.train()
     ### END CODE HERE
     return tconf, trainer_obj
 
@@ -131,6 +132,7 @@ def pretrain(pretrain_dataset, block_size, model, pretrain_lr=6e-3, writer=None)
     )
 
     trainer_obj = Trainer(model, pretrain_dataset, None, tconf)
+    trainer_obj.train()
     ### END CODE HERE
     return tconf, trainer_obj
 
